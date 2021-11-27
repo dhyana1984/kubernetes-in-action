@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-manual # name of pod
+spec:
+  containers:
+    - image: dhyana1984/kubia
+      name: kubia # name of container
+      ports:
+        - containerPort: 8080
+          protocol: TCP
