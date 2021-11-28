@@ -155,3 +155,49 @@ $ curl localhost:8888 # Open a new console and visit localhost:8888
 # Handling connection for 8888
 # Handling connection for 8888
 ```
+
+# Add labels in ymal
+```ymal
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-manual-v2 # name of pod
+  labels:
+    creation_method: manual
+    env: prod
+spec:
+  containers:
+    - image: dhyana1984/kubia
+      name: kubia # name of container
+      ports:
+        - containerPort: 8080
+          protocol: TCP
+```
+
+# Display the labels of pod
+```bash
+$ kubectl get po --show-labels   
+
+#List the labels that we need, creation_method and env are the key of labels
+$ kubectl get po -L creation_method,env
+```
+
+# Add and edit label for pod. Add creation_method=manual label for kubia-manual
+```bash
+$ kubectl label po kubia-manual creation_method=manual
+
+# Edit the label "env" value to "debug" for kubia-manual-v2, need add --overwrite 
+$ kubectl label po kubia-manual-v2 env=debug --overwrite 
+```
+
+# Filter pod by label key. 
+```bash
+# Filter the pods that with "creation_method" label value is "manual"
+$ kubectl get po -l creation_method=manual --show-labels  
+
+# Filter the pods that with "env" label, whatever the  value is 
+$ kubectl get po -l env --show-labels  
+
+# Filter the pods that without 'env' label
+$ kubectl get po -l '!env' 
+```
