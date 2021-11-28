@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-gpu
+spec:
+  nodeSelector:
+    gpu: 'true' # the node selector ask for deploy this pod to the node that includes gpu=true label
+  containers:
+    - image: dhyana1984/kubia
+      name: kubia # name of container
