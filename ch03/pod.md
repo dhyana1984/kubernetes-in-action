@@ -155,8 +155,9 @@ $ curl localhost:8888 # Open a new console and visit localhost:8888
 # Handling connection for 8888
 # Handling connection for 8888
 ```
-
-# Add labels in ymal
+# Label
+We can use label to filter and classify pods
+## Add labels in ymal
 ```ymal
 apiVersion: v1
 kind: Pod
@@ -174,7 +175,7 @@ spec:
           protocol: TCP
 ```
 
-# Display the labels of pod
+## Display the labels of pod
 ```bash
 $ kubectl get po --show-labels   
 
@@ -182,7 +183,7 @@ $ kubectl get po --show-labels
 $ kubectl get po -L creation_method,env
 ```
 
-# Add and edit label for pod. Add creation_method=manual label for kubia-manual
+## Add and edit label for pod. Add creation_method=manual label for kubia-manual
 ```bash
 $ kubectl label po kubia-manual creation_method=manual
 
@@ -190,7 +191,7 @@ $ kubectl label po kubia-manual creation_method=manual
 $ kubectl label po kubia-manual-v2 env=debug --overwrite 
 ```
 
-# Filter pod by label key. 
+## Filter pod by label key. 
 ```bash
 # Filter the pods that with "creation_method" label value is "manual"
 $ kubectl get po -l creation_method=manual --show-labels  
@@ -200,4 +201,68 @@ $ kubectl get po -l env --show-labels
 
 # Filter the pods that without 'env' label
 $ kubectl get po -l '!env' 
+```
+
+# Annotate
+## Add annotate "mycompany.com/someannotation" as "foo bar"
+```bash
+$ kubectl annotate pod kubia-manual mycompany.com/someannotation="foo bar"
+```
+
+## Check the annotate
+```bash
+$ kubectl describe pod kubia-manual
+```
+
+# Namespace
+Namespace allow us to isolate different resouce in separated space
+
+## Check namespace
+```bash
+$ kubectl get ns   
+```
+
+## Check pods in a certain namespace, use --namespace or -n
+```bash
+$ kubectl get po --namespace kube-system
+$ kubectl get po -n kube-public 
+```
+
+## Create namespace
+We can create a yaml file then use 'kubectl create -f custom-namespace.yaml' to create the namespace, but we can also use command to create namespace directly
+```bash
+$ kubectl create namespace custom-namespace1
+```
+
+## Create pod in a namespace "custom-namespace"
+```bash
+$ kubectl create -f kubia-manual.yaml -n custom-namespace
+```
+
+# Delete pod
+
+## Delete directly
+```bash
+$ kubectl delete po kubia
+```
+
+## Delete by label
+```bash
+$ kubectl delete po -l creation_method=manual
+```
+
+## Delete by namespace
+```bash
+$ kubectl delete ns custom-namespace
+```
+
+## Delete all pods
+As we create pods based on created ReplicationController, so when delete all pods, the new pods will be created
+```bash
+$ kubectl delete po --all
+```
+
+## Delete all objects
+```bash
+$ kubectl delete all --all
 ```
