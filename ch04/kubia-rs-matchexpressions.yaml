@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: ReplicaSet # create ReplicaSet
+metadata:
+  name: kubia # name of ReplicationController
+spec:
+  replicas: 3
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - kubia
+  template:
+    metadata:
+      labels:
+        app: kubia
+    spec:
+      containers:
+        - name: kubia
+          image: dhyana1984/kubia

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubia-liveness
+spec:
+  containers:
+    - image: dhyana1984/kubia-unhealthy
+      name: kubia
+      livenessProbe:
+        httpGet: # http probe
+          path: /
+          port: 8080
+          initialDelaySeconds:15 # Kubernetes will wait 15 seconds before first time launch probe. This is must to avoid some problem
