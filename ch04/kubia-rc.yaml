@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicationController # create ReplicationController
+metadata:
+  name: kubia-1 # name of ReplicationController
+spec:
+  replicas: 3
+  selector:
+    app: kubia # selector determines the object that will be handled
+  template:
+    metadata:
+      labels:
+        app: kubia
+        test: abc
+    spec:
+      containers:
+        - name: kubia
+          image: dhyana1984/kubia
+          ports:
+            - containerPort: 8080
