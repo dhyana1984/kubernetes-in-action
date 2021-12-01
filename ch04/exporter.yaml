@@ -1,0 +1,16 @@
+apiVersion: batch/v1 # Job belongs to batch API group
+kind: Job
+metadata:
+  name: batch-job
+spec:
+  completions: 5 # How many times we want to job to run, 5 pods will be created, one complete anoterh one will be created
+  parallelism: 2 # How many job we want to job to run at the same time.
+  template:
+    metadata:
+      labels:
+        app: batch-job
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: main
+          image: luksa/batch-job
