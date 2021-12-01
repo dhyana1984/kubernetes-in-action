@@ -34,3 +34,13 @@ $ kubectl delete rc kubia --cascade=orphan
 ```bash
 $ kubectl get rs
 ```
+
+# get Job
+```bash
+$ kubectl get jobs  
+```
+
+# Check log for Job
+```bash
+$ kubectl logs batch-job--1-4c4p5
+```
