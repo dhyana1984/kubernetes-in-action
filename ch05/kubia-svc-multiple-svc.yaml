@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service # create a service object
+metadata:
+  name: kubia-multiple-service
+spec:
+  ports:
+    - name: http # name for http, this is necessary if create multiple port for one servic
+      port: 80 # service forward the link to container port
+      targetPort: 8080
+    - name: httos # name for https
+      port: 443
+      targetPort: 8443
+  selector: # service indludes the pods which have the labels
+    app: kubia
