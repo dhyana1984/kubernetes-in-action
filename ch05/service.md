@@ -36,3 +36,27 @@ $ curl http://kubia.default
 ```bash
 $ kubectl get endpoints kubia  
 ```
+
+# If using GKE cluster, find the external IP then visit the NodePort service
+```bash
+$ kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}'
+$ curl http://<ExternalIP>:<port>
+```
+
+# If using minikube, we need to start the service first
+```bash
+$ minikube service <service-name>[-n <spacename>]
+```
+
+# Check the addons
+```bash
+$ minikube addons list 
+
+# Install ingress
+$ minikube addons enable ingress
+```
+
+# Get all pod from all namespaces
+```bash
+$ kubectl get po --all-namespaces
+```
