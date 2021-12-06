@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fortune
+spec:
+  containers:
+    - image: luksa/fortune # The first container which is the image dhyana1984/fortune
+      name: html-generator
+      volumeMounts:
+        - name: html # The named html volume mounts in /var/htdocs of container
+          mountPath: /var/htdocs
+    - image: nginx:alpine
+      name: web-server
+      volumeMounts:
+        - name: html
+          mountPath: /usr/share/nginx/html # The same volume as above but mounts on /usr/share/nginx/html
+          readOnly: true # It's read only
+      ports:
+        - containerPort: 80
+          protocol: TCP
+  volumes: # A named html empty volume
+    - name: html
+      emptyDir: {} # emprty dir volume
