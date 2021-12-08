@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim # This pvc will bound to the pv
+metadata:
+  name: mongodb-pvc
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: '' # Use '' to avoid using the default PV, but we want use the existing PV
