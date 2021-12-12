@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fortune2s
+spec:
+  containers:
+    - image: dhyana1984/fortune:args
+      args: ['2'] # This is the args will pass to container
+      name: html-generator
+      volumeMounts:
+      - name: html-generator
+      volumeMounts:
+      - name: html
+      mountPath: /var/htdocs
