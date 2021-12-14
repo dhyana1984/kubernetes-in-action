@@ -27,3 +27,8 @@ $ kubectl edit configmap fortune-config
 ```bash
 $  kubectl exec fortune-configmap-volume -c web-server -- nginx -s reload
 ```
+
+# Describe a secret
+```bash
+$ kubectl describe secrets
+```
