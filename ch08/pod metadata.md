@@ -35,3 +35,8 @@ $ TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
 $ curl -H "Authorization: Bearer $TOKEN" https://kubernetes
 
 ```
+
+# Start minikube with SwaggerUI
+```bash
+$ minikube start  --extra-config=apiserver.enable-swagger-ui=true
+```
