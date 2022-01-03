@@ -16,3 +16,16 @@ Mountable secrets:   foo-token-9klml # secret object
 Tokens:              foo-token-9klml
 Events:              <none>
 ```
+
+# Create role and role binding
+```bash
+# Create role
+$ kubectl create role service-reader --verb=get --verb=list --resource=services -n bar  
+$ kubectl create -f service-reader.yml -n foo   # from file
+
+# Create role binding, create a test role binding and bind service-reader and default service account in foo namespace
+$ kubectl create rolebinding test --role=service-reader --serviceaccount=foo:default -n foo
+
+# Then pod can visit services via default service account
+$ kubectl exec -it test -n foo --  curl localhost:8001/api/v1/namespaces/foo/services
+```
