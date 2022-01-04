@@ -29,3 +29,6 @@ $ kubectl create rolebinding test --role=service-reader --serviceaccount=foo:def
 # Then pod can visit services via default service account
 $ kubectl exec -it test -n foo --  curl localhost:8001/api/v1/namespaces/foo/services
 ```
+
+# Create cluster role and cluster role binding
+$ kubectl create clusterrole pv-reader --verb=get,list --resource=persistentvolumes
