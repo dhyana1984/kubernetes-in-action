@@ -31,4 +31,9 @@ $ kubectl exec -it test -n foo --  curl localhost:8001/api/v1/namespaces/foo/ser
 ```
 
 # Create cluster role and cluster role binding
+```bash
 $ kubectl create clusterrole pv-reader --verb=get,list --resource=persistentvolumes
+$ kubectl create clusterrolebinding pv-test --clusterrole=pv-reader --serviceaccount=foo:default
+```
+
+# If use cluster role and normal role binding, all namespace could reuse the cluster role, but pod only can visit the resouce in it's namespace
